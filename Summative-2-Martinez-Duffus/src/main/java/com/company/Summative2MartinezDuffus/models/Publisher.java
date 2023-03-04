@@ -24,13 +24,14 @@ public class Publisher {
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "publisherId")
+    @JoinColumn(name = "publisher_id")
     Set<Book> books = new HashSet<>();
 
     @NotNull
     private String state;
 
     @NotNull
+    @Column(name="postal_code")
     private String postalCode;
 
     @NotNull

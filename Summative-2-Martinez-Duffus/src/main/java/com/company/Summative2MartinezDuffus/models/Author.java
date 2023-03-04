@@ -19,16 +19,18 @@ public class Author {
     private Integer id;
 
     @NotNull
+    @Column(name="first_name")
     private String firstName;
 
     @NotNull
+    @Column(name="last_name")
     private String lastName;
 
     @NotNull
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "authorId")
+    @JoinColumn(name = "author_id")
     private Set<Book> books = new HashSet<>();
 
     @NotNull
@@ -38,6 +40,7 @@ public class Author {
     private String state;
 
     @NotNull
+    @Column(name="postal_code")
     private String postalCode;
 
     @NotNull

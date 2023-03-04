@@ -23,15 +23,18 @@ public class Book implements Serializable {
     private String isbn;
 
     @NotNull
+    @Column(name="publish_date")
     private Date publishDate;
 
     @NotNull
+    @Column(name="author_id")
     private int authorId;
 
     @NotNull
     private String title;
 
     @NotNull
+    @Column(name="publisher_id")
     private int publisherId;
 
     @NotNull
