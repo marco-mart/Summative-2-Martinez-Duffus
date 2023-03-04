@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -23,8 +24,8 @@ public class Publisher {
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "publisher_id")
-    HashSet<Book> books = new HashSet<>();
+    @JoinColumn(name = "publisherId")
+    Set<Book> books = new HashSet<>();
 
     @NotNull
     private String state;
@@ -62,11 +63,11 @@ public class Publisher {
         this.street = street;
     }
 
-    public HashSet<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(HashSet<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 

@@ -28,7 +28,7 @@ public class Author {
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "authorId")
     private Set<Book> books = new HashSet<>();
 
     @NotNull
