@@ -1,8 +1,7 @@
 package com.company.Summative2MartinezDuffus.controllers;
 
 import com.company.Summative2MartinezDuffus.models.Book;
-import com.company.Summative2MartinezDuffus.models.Publisher;
-import com.company.Summative2MartinezDuffus.repository.BookRepository;
+import com.company.Summative2MartinezDuffus.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

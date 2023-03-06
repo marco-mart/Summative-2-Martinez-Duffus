@@ -1,7 +1,7 @@
 package com.company.Summative2MartinezDuffus.controllers;
 
 import com.company.Summative2MartinezDuffus.models.Author;
-import com.company.Summative2MartinezDuffus.repository.AuthorRepository;
+import com.company.Summative2MartinezDuffus.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,8 @@ public class AuthorController {
 
     @PostMapping("/authors")
     @ResponseStatus(HttpStatus.CREATED)
-    public void CreateAuthor(@RequestBody Author author){
-        repo.save(author);
+    public Author createAuthor(@RequestBody Author author){
+        return repo.save(author);
     }
 
     @GetMapping("/authors/{id}")
