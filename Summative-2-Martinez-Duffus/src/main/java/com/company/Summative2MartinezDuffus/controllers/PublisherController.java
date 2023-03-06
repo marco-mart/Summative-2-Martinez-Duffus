@@ -17,13 +17,13 @@ public class PublisherController {
     @Autowired
     PublisherRepository repo;
 
-    @PostMapping("/publisher")
+    @PostMapping("/publishers")
     @ResponseStatus(HttpStatus.CREATED)
     public void CreatePublisher(@RequestBody Publisher publisher){
         repo.save(publisher);
     }
 
-    @GetMapping("/publisher/{id}")
+    @GetMapping("/publishers/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Publisher getPublisherById(@PathVariable int id){
         Optional<Publisher> publisher = repo.findById(id);
@@ -36,19 +36,19 @@ public class PublisherController {
 
     }
 
-    @GetMapping("/publisher")
+    @GetMapping("/publishers")
     @ResponseStatus(HttpStatus.OK)
     public List<Publisher> getAllPublishers(){
         return repo.findAll();
     }
 
-    @PutMapping("/publisher")
+    @PutMapping("/publishers")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePublisher(@RequestBody Publisher publisher){
         repo.save(publisher);
     }
 
-    @DeleteMapping("/publisher/{id}")
+    @DeleteMapping("/publishers/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePublisher(@PathVariable int id){
         repo.deleteById(id);

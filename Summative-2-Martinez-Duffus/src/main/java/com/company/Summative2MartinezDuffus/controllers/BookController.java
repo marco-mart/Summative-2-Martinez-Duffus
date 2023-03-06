@@ -16,13 +16,13 @@ public class BookController {
     @Autowired
     BookRepository repo;
 
-    @PostMapping("/book")
+    @PostMapping("/books")
     @ResponseStatus(HttpStatus.CREATED)
     public void CreateBook(@RequestBody Book book){
         repo.save(book);
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/books/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Book getBookById(@PathVariable int id){
         Optional<Book> book = repo.findById(id);
@@ -35,27 +35,30 @@ public class BookController {
 
     }
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     @ResponseStatus(HttpStatus.OK)
     public List<Book> getAllBooks(){
         return repo.findAll();
     }
 
-    @PutMapping("/book")
+    @PutMapping("/books")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateBook(@RequestBody Book book){
         repo.save(book);
     }
 
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping("/books/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable int id){
         repo.deleteById(id);
     }
 
-    @GetMapping("/book/author/{id}")
+    /**
+     * Get books by author id
+     */
+    @GetMapping("/books/author/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Book> GetBooksByAuthorId(@PathVariable int id){ //custom query
+    public List<Book> GetBooksByAuthorId(@PathVariable int id){ // custom query
         return repo.findAllByAuthorId(id);
     }
 }
