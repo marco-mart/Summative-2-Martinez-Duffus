@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="author")
-public class Author {
+public class Author implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,13 +50,7 @@ public class Author {
     @NotNull
     private String email;
 
-    public Set<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
 
     public Integer getId() {
         return id;
