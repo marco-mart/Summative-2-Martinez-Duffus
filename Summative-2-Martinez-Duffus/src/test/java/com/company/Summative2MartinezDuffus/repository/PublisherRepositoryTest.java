@@ -77,5 +77,29 @@ public class PublisherRepositoryTest {
 
     }
 
+    @Test
+    public void ShouldDeleteAPublisher () throws Exception {
+        Publisher publisher = new Publisher();
+        Set<Book> books = new HashSet<>();
+
+        publisher.setName("epic");
+        publisher.setStreet("11213 epic street");
+        publisher.setBooks(books);
+        publisher.setState("CA");
+        publisher.setCity("LA");
+        publisher.setPostalCode("11123");
+        publisher.setPhone("123-456-789");
+        publisher.setEmail("epic@gmail.com");
+
+        publisher = repo.save(publisher);
+
+        repo.deleteById(publisher.getId());
+
+        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
+
+        assertFalse(publisher1.isPresent());
+
+    }
+
 
 }
