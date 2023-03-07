@@ -1,7 +1,7 @@
 package com.company.Summative2MartinezDuffus.controllers;
 
 import com.company.Summative2MartinezDuffus.models.Author;
-import com.company.Summative2MartinezDuffus.repository.AuthorRepository;
+import com.company.Summative2MartinezDuffus.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +15,13 @@ public class AuthorController {
     @Autowired
     AuthorRepository repo;
 
-    @PostMapping("/author")
+    @PostMapping("/authors")
     @ResponseStatus(HttpStatus.CREATED)
-    public void CreateAuthor(@RequestBody Author author){
-        repo.save(author);
+    public Author createAuthor(@RequestBody Author author){
+        return repo.save(author);
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/authors/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Author getAuthorById(@PathVariable int id){
         Optional<Author> author= repo.findById(id);
@@ -34,19 +34,19 @@ public class AuthorController {
 
     }
 
-    @GetMapping("/author")
+    @GetMapping("/authors")
     @ResponseStatus(HttpStatus.OK)
     public List<Author> getAllAuthors(){
         return repo.findAll();
     }
 
-    @PutMapping("/author")
+    @PutMapping("/authors")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateAuthor(@RequestBody Author author){
         repo.save(author);
     }
 
-    @DeleteMapping("/author/{id}")
+    @DeleteMapping("/authors/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAuthor(@PathVariable int id){
         repo.deleteById(id);

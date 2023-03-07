@@ -1,4 +1,4 @@
-package com.company.Summative2MartinezDuffus.repository;
+package com.company.Summative2MartinezDuffus.repositories;
 
 import com.company.Summative2MartinezDuffus.models.Author;
 import com.company.Summative2MartinezDuffus.models.Book;

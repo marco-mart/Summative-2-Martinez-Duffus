@@ -1,4 +1,4 @@
-package com.company.Summative2MartinezDuffus.repository;
+package com.company.Summative2MartinezDuffus.repositories;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
