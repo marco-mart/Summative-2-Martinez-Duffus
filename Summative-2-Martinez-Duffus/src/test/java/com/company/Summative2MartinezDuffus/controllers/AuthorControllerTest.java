@@ -12,8 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import java.util.HashSet;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,7 +26,7 @@ public class AuthorControllerTest
     private MockMvc mockMvc;
 
     @MockBean
-    AuthorRepository customerRepository;
+    AuthorRepository authorRepository;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -40,7 +41,7 @@ public class AuthorControllerTest
      * Response Status: 201 Created
      */
     @Test
-    public void shouldCreateNewCustomer() throws Exception {
+    public void shouldCreateNewAuthor() throws Exception {
 
         // ARRANGE
         Author author = new Author();
@@ -52,6 +53,7 @@ public class AuthorControllerTest
         author.setEmail("flyeaglesfly1@gmail.com");
         author.setPhone("1-(215)619-3465");
         author.setPostalCode("19019");
+        author.setBooks(new HashSet<>());
 
         String authorJson = mapper.writeValueAsString(author);
 
@@ -63,6 +65,126 @@ public class AuthorControllerTest
                 )
                 .andDo(print())                                // Print results to console
                 .andExpect(status().isCreated());              // Assert status code is 201
+    }
+
+    /**
+     * Tests updating an existing Author record
+     *
+     * HTTP Method: PUT
+     * Endpoint: "/authors"
+     * Request body: updated Author object
+     * Response body: newly updated Author object
+     *
+     * Response Status: 204 No Content
+     */
+    @Test
+    public void shouldUpdateAuthor() throws Exception
+    {
+        // ARRANGE
+
+        // PUT and POST on the repository side is the same function
+
+        // Create new Author
+        Author author = new Author();
+        author.setFirstName("Marco");
+        author.setLastName("Martinez");
+        author.setStreet("1012 S Silver Ave");
+        author.setCity("Deming");
+        author.setState("NM");
+        author.setEmail("nmfresh@gmail.com");
+        author.setPhone("1-(575)123-4567");
+        author.setPostalCode("88030");
+        author.setBooks(new HashSet<>());
+
+        String authorJson = mapper.writeValueAsString(author);
+
+        // ACT
+        mockMvc.perform(
+                        put("/authors")                                 // Perform the PUT request
+                                .content(authorJson)                           // Set the request body
+                                .contentType(MediaType.APPLICATION_JSON)            // Tell the server that it is JSON format
+                )
+                .andDo(print())                                             // Print results to console
+                .andExpect(status().isNoContent());                         // Assert status code is 204
+
+    }
+
+    /**
+     * Tests Deleting an existing Author
+     *
+     * HTTP Method: DELETE
+     * Endpoint: "/authors/{id}"
+     * Request body: n/a
+     * Response body: n/a
+     *
+     * Response Status: 204 No Content
+     */
+    @Test
+    public void shouldDeleteAuthor() throws Exception
+    {
+        // ARRANGE
+
+        // Because we test the repository elsewhere, we only test for the correct response.
+
+        // ACT
+        mockMvc.perform(
+                        delete("/authors/1")                        // Perform DELETE
+                )
+                .andDo(print())                                         // Print results to Console
+                .andExpect(status().isNoContent());                     // Assert status code 204
+
+    }
+
+    /**
+     * Tests getting an Author by id
+     *
+     * HTTP Method: GET
+     * Endpoint: "/authors/{id}"
+     * Request body: n/a
+     * Response body: Author (if found)
+     *
+     * Response Status: 200 Ok
+     */
+    @Test
+    public void shouldGetAuthorById() throws Exception
+    {
+        // ARRANGE
+
+        // Because we test the repository elsewhere, we only test for the correct response.
+
+        // ACT
+
+        mockMvc.perform(
+                        get("/authors/1")
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    /**
+     * Tests getting all Authors
+     *
+     * HTTP Method: GET
+     * Endpoint: "/authors"
+     * Request body: n/a
+     * Response body: Author (if found)
+     *
+     * Response Status: 200 Ok
+     */
+    @Test
+    public void shouldGetAllAuthors() throws Exception
+    {
+        // ARRANGE
+
+        // Because we test the repository elsewhere, we only test for the correct response.
+
+        // ACT
+
+        mockMvc.perform(
+                        get("/authors")
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 }

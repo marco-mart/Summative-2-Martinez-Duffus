@@ -35,6 +35,9 @@ public class Publisher {
     private String postalCode;
 
     @NotNull
+    private String city;
+
+    @NotNull
     private String phone;
 
     @NotNull
@@ -102,6 +105,14 @@ public class Publisher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
