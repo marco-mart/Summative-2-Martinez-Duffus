@@ -31,6 +31,9 @@ public class Publisher {
     private String state;
 
     @NotNull
+    private String city;
+
+    @NotNull
     @Column(name="postal_code")
     private String postalCode;
 
@@ -42,6 +45,15 @@ public class Publisher {
 
     @NotNull
     private String email;
+
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public Integer getId() {
         return id;

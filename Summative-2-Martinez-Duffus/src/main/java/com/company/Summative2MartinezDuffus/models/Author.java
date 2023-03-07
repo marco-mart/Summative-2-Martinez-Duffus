@@ -49,6 +49,14 @@ public class Author {
     @NotNull
     private String email;
 
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
     public Integer getId() {
         return id;
     }
