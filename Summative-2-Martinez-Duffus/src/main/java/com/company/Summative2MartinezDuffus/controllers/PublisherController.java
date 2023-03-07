@@ -17,8 +17,8 @@ public class PublisherController {
 
     @PostMapping("/publishers")
     @ResponseStatus(HttpStatus.CREATED)
-    public void CreatePublisher(@RequestBody Publisher publisher){
-        repo.save(publisher);
+    public Publisher CreatePublisher(@RequestBody Publisher publisher){
+        return repo.save(publisher);
     }
 
     @GetMapping("/publishers/{id}")
