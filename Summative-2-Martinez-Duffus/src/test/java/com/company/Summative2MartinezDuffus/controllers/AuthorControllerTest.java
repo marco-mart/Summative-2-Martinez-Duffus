@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashSet;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,7 +26,7 @@ public class AuthorControllerTest
     private MockMvc mockMvc;
 
     @MockBean
-    AuthorRepository customerRepository;
+    AuthorRepository authorRepository;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -51,6 +53,7 @@ public class AuthorControllerTest
         author.setEmail("flyeaglesfly1@gmail.com");
         author.setPhone("1-(215)619-3465");
         author.setPostalCode("19019");
+        author.setBooks(new HashSet<>());
 
         String authorJson = mapper.writeValueAsString(author);
 
@@ -91,6 +94,7 @@ public class AuthorControllerTest
         author.setEmail("nmfresh@gmail.com");
         author.setPhone("1-(575)123-4567");
         author.setPostalCode("88030");
+        author.setBooks(new HashSet<>());
 
         String authorJson = mapper.writeValueAsString(author);
 
