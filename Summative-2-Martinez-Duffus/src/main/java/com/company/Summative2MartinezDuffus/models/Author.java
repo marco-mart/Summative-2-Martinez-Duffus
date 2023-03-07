@@ -49,6 +49,9 @@ public class Author {
     @NotNull
     private String email;
 
+
+
+
     public Integer getId() {
         return id;
     }
@@ -119,6 +122,14 @@ public class Author {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override
