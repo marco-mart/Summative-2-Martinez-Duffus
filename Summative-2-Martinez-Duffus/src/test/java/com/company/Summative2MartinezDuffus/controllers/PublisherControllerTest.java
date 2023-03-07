@@ -107,17 +107,17 @@ public class PublisherControllerTest
     }
 
     /**
-     * Tests Deleting an existing Author
+     * Tests Deleting an existing Publisher
      *
      * HTTP Method: DELETE
-     * Endpoint: "/authors/{id}"
+     * Endpoint: "/publishers/{id}"
      * Request body: n/a
      * Response body: n/a
      *
      * Response Status: 204 No Content
      */
     @Test
-    public void shouldDeleteAuthor() throws Exception
+    public void shouldDeletePublisher() throws Exception
     {
         // ARRANGE
 
@@ -125,7 +125,7 @@ public class PublisherControllerTest
 
         // ACT
         mockMvc.perform(
-                        delete("/authors/1")                        // Perform DELETE
+                        delete("/publishers/1")                        // Perform DELETE
                 )
                 .andDo(print())                                         // Print results to Console
                 .andExpect(status().isNoContent());                     // Assert status code 204
@@ -133,17 +133,17 @@ public class PublisherControllerTest
     }
 
     /**
-     * Tests getting an Author by id
+     * Tests getting a Publisher by id
      *
      * HTTP Method: GET
-     * Endpoint: "/authors/{id}"
+     * Endpoint: "/publishers/{id}"
      * Request body: n/a
-     * Response body: Author (if found)
+     * Response body: Publishers (if found)
      *
      * Response Status: 200 Ok
      */
     @Test
-    public void shouldGetAuthorById() throws Exception
+    public void shouldGetPublisherById() throws Exception
     {
         // ARRANGE
 
@@ -152,24 +152,24 @@ public class PublisherControllerTest
         // ACT
 
         mockMvc.perform(
-                        get("/authors/1")
+                        get("/publishers/1")
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
     /**
-     * Tests getting all Authors
+     * Tests getting all Publishers
      *
      * HTTP Method: GET
-     * Endpoint: "/authors"
+     * Endpoint: "/publishers"
      * Request body: n/a
-     * Response body: Author (if found)
+     * Response body: Publisher (if found)
      *
      * Response Status: 200 Ok
      */
     @Test
-    public void shouldGetAllAuthors() throws Exception
+    public void shouldGetAllPublishers() throws Exception
     {
         // ARRANGE
 
@@ -178,7 +178,7 @@ public class PublisherControllerTest
         // ACT
 
         mockMvc.perform(
-                        get("/authors")
+                        get("/publishers")
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
