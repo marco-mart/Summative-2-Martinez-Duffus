@@ -1,12 +1,14 @@
 package com.company.Summative2MartinezDuffus.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import jdk.vm.ci.meta.Local;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +26,7 @@ public class Book implements Serializable {
 
     @NotNull
     @Column(name="publish_date")
-    private Date publishDate;
+    private LocalDate publishDate;
 
     @NotNull
     @Column(name="author_id")
@@ -56,11 +58,11 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
-    public Date getPublishDate() {
+    public LocalDate getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(Date publishDate) {
+    public void setPublishDate(LocalDate publishDate) {
         this.publishDate = publishDate;
     }
 
