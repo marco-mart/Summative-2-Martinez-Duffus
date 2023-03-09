@@ -13,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -48,7 +46,7 @@ public class BookControllerTest
         // ARRANGE
         Book book = new Book();
         book.setIsbn("978-3-16-148410-0");
-        book.setPublishDate(Date.valueOf("2012-10-12"));
+    //    book.setPublishDate(LocalDate.of(2012, 10, 12));
         book.setTitle("Dalonte Strikes Again");
         book.setPrice(new BigDecimal("12.99"));
 
@@ -80,7 +78,7 @@ public class BookControllerTest
         // ARRANGE
         Book book = new Book();
         book.setIsbn("879-1-36-147520-1");
-        book.setPublishDate(Date.valueOf("2001-09-01"));
+ //       book.setPublishDate(LocalDate.of(2001, 9, 1));
         book.setTitle("Finding the Light in the Darkness");
         book.setPrice(new BigDecimal("3.99"));
 
