@@ -1,0 +1,47 @@
+type Publisher {
+    publisher_id: Int!
+    name: String!
+    street: String!
+    state: String!
+    city: String!
+    postal_code: String!
+    phone: String!
+    email: String!
+}
+
+type Author {
+    author_id: Int!
+    first_name: String!
+    last_name: String!
+    street: String!
+    city: String!
+    state: String!
+    phone: String!
+    email: String!
+}
+
+scalar Date #stack overflow
+
+type Book {
+    book_id: Int!
+    isbn: String!
+    publish_date: Date!
+    author_id: Int!
+    title: String!
+    publisher_id: Int!
+    price : Float!
+}
+
+type Query {
+    publishers: [Publisher]!
+    findPublisherById(id:Int): Publisher
+
+    author: [Author]!
+    findAuthorById(id:Int): Author
+
+    books: [Book]!
+    findBookById(id:Int): Book
+}
+
+
+

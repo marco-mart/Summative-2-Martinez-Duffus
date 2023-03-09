@@ -8,10 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -21,26 +20,16 @@ import static org.junit.Assert.*;
 public class PublisherRepositoryTest {
 
     @Autowired
-    PublisherRepository publisherRepo;
-
-    @Autowired
-    BookRepository bookRepository;
-
-    @Autowired
-    AuthorRepository authorRepository;
-
-    private Publisher publisher;
-    private Author author;
-    private Book book;
-
+    PublisherRepository repo;
 
     @Before
     public void SetUp() throws Exception {
-        publisherRepo.deleteAll();
-        bookRepository.deleteAll();
-        authorRepository.deleteAll();
+        repo.deleteAll();
+    }
 
-        publisher = new Publisher();
+    @Test
+    public void ShouldCreateAPublisher () throws Exception{
+        Publisher publisher = new Publisher();
         Set<Book> books = new HashSet<>();
 
         publisher.setName("epic");
@@ -52,37 +41,10 @@ public class PublisherRepositoryTest {
         publisher.setPhone("123-456-789");
         publisher.setEmail("epic@gmail.com");
 
-        author = new Author();
 
+        publisher = repo.save(publisher);
 
-        author.setFirstName("Mark");
-        author.setLastName("Epic");
-        author.setStreet("1112 street");
-        author.setBooks(books);
-        author.setCity("Miami");
-        author.setState("FL");
-        author.setPostalCode("1111");
-        author.setPhone("123-456-7890");
-        author.setEmail("Mark@gmail.com");
-
-        author = authorRepository.save(author);
-
-        book = new Book();
-        book.setIsbn("1111111111");
-        book.setPublishDate(LocalDate.of(2012,10,12));
-        book.setTitle("Death");
-        book.setPublisherId(publisher.getId());
-        BigDecimal num = new BigDecimal("1.00");
-        book.setPrice(num);
-        book.setAuthorId(author.getId());
-
-        book = bookRepository.save(book);
-    }
-
-    @Test
-    public void ShouldCreateAPublisher () throws Exception{
-
-        Optional<Publisher> publisher1 = publisherRepo.findById(publisher.getId());
+        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
 
         assertEquals(publisher1.get(),publisher);
 
@@ -102,12 +64,12 @@ public class PublisherRepositoryTest {
         publisher.setPhone("123-456-789");
         publisher.setEmail("epic@gmail.com");
 
-        Publisher publisher1 = publisherRepo.save(publisher);
+        Publisher publisher1 = repo.save(publisher);
 
 
         publisher1.setName("swag");
 
-        Publisher publisher2 = publisherRepo.save(publisher1);
+        Publisher publisher2 = repo.save(publisher1);
 
         assertEquals(publisher2,publisher1);
 
@@ -128,11 +90,11 @@ public class PublisherRepositoryTest {
         publisher.setPhone("123-456-789");
         publisher.setEmail("epic@gmail.com");
 
-        publisher = publisherRepo.save(publisher);
+        publisher = repo.save(publisher);
 
-        publisherRepo.deleteById(publisher.getId());
+        repo.deleteById(publisher.getId());
 
-        Optional<Publisher> publisher1 = publisherRepo.findById(publisher.getId());
+        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
 
         assertFalse(publisher1.isPresent());
 
@@ -153,9 +115,9 @@ public class PublisherRepositoryTest {
         publisher.setPhone("123-456-789");
         publisher.setEmail("epic@gmail.com");
 
-        publisher = publisherRepo.save(publisher);
+        publisher = repo.save(publisher);
 
-        Optional<Publisher> publisher1 = publisherRepo.findById(publisher.getId());
+        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
 
         assertEquals(publisher1.get(),publisher);
 
@@ -177,17 +139,17 @@ public class PublisherRepositoryTest {
         publisher.setPhone("123-456-789");
         publisher.setEmail("epic@gmail.com");
 
-        publisher = publisherRepo.save(publisher);
+        publisher = repo.save(publisher);
 
         List<Publisher> publisherList = new ArrayList<>();
 
         publisherList.add(publisher);
 
-        List<Publisher> publisherList2 = publisherRepo.findAll();
+        List<Publisher> publisherList2 = repo.findAll();
 
         assertEquals(publisherList2,publisherList);
     }
-
+  
 
 
 
