@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="publisher")
-public class Publisher {
+public class Publisher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="publisher_id")
@@ -31,14 +32,20 @@ public class Publisher {
     private String state;
 
     @NotNull
+    private String city;
+
+    @NotNull
     @Column(name="postal_code")
     private String postalCode;
+
 
     @NotNull
     private String phone;
 
     @NotNull
     private String email;
+
+
 
     public Integer getId() {
         return id;
@@ -102,6 +109,14 @@ public class Publisher {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
