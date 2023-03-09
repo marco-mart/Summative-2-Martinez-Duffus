@@ -51,8 +51,6 @@ public class Author implements Serializable {
     private String email;
 
 
-
-
     public Integer getId() {
         return id;
     }
