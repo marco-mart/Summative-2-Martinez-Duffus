@@ -26,7 +26,7 @@ public class GraphController {
     PublisherRepository PublisherRepo;
 
     @Query
-    public Publisher findPublisherById(@Argument Integer id) {
+    public Publisher findPublisherById(@Argument int id) {
         Optional<Publisher> publisher = PublisherRepo.findById(id);
 
         if (publisher.isPresent()){
@@ -37,7 +37,7 @@ public class GraphController {
     }
 
     @Query
-    public Author findAuthorById(@Argument Integer id){
+    public Author findAuthorById(@Argument int id){
         Optional<Author> author= AuthorRepo.findById(id);
 
         if (author.isPresent()){
@@ -48,7 +48,7 @@ public class GraphController {
     }
 
     @Query
-    public Book findBookById(@Argument Integer id){
+    public Book findBookById(@Argument int id){
         Optional<Book> book = BookRepo.findById(id);
 
         if (book.isPresent()){

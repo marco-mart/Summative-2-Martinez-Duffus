@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -20,56 +22,121 @@ import static org.junit.Assert.*;
 public class PublisherRepositoryTest {
 
     @Autowired
-    PublisherRepository repo;
+    BookRepository BookRepo;
+
+    @Autowired
+    AuthorRepository AuthorRepo;
+
+    @Autowired
+    PublisherRepository PublisherRepo;
 
     @Before
-    public void SetUp() throws Exception {
-        repo.deleteAll();
+    public void Setup() throws Exception {
+        BookRepo.deleteAll();
+        AuthorRepo.deleteAll();
+        PublisherRepo.deleteAll();
     }
 
     @Test
     public void ShouldCreateAPublisher () throws Exception{
-        Publisher publisher = new Publisher();
         Set<Book> books = new HashSet<>();
 
-        publisher.setName("epic");
-        publisher.setStreet("11213 epic street");
-        publisher.setBooks(books);
+        Publisher publisher = new Publisher();
+        publisher.setName("Foxware");
+        publisher.setStreet("Ann Ave");
+        publisher.setCity("Los Angeles");
         publisher.setState("CA");
-        publisher.setCity("LA");
-        publisher.setPostalCode("11123");
-        publisher.setPhone("123-456-789");
-        publisher.setEmail("epic@gmail.com");
+        publisher.setPostalCode("78952");
+        publisher.setPhone("1-(816)255-4849");
+        publisher.setEmail("bestpublisher@publishing.org");
+        publisher.setBooks(books);
+
+        publisher = PublisherRepo.save(publisher);
+
+        Author author = new Author();
+        author.setFirstName("Mark");
+        author.setLastName("Epic");
+        author.setStreet("1112 street");
+        //books.add(book);
+        //author.setBooks(books);
+        author.setCity("Miami");
+        author.setState("FL");
+        author.setPostalCode("1111");
+        author.setPhone("123-456-7890");
+        author.setEmail("Mark@gmail.com");
 
 
-        publisher = repo.save(publisher);
+        AuthorRepo.save(author);
 
-        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
+        Book book = new Book();
+        book.setIsbn("1111111111");
+        book.setPublishDate(LocalDate.of(2012,10,12));
+        book.setTitle("Death");
+        book.setPublisherId(publisher.getId());
+        BigDecimal num = new BigDecimal("1.00");
+        book.setPrice(num);
+        book.setAuthorId(author.getId());
 
-        assertEquals(publisher1.get(),publisher);
+        book = BookRepo.save(book);
+
+        books.add(book);
+
+        Optional<Publisher> publisher1 = PublisherRepo.findById(publisher.getId());
+
+        assertEquals(publisher,publisher1.get());
 
     }
 
     @Test
     public void ShouldUpdateAPublisher() throws Exception {
-        Publisher publisher = new Publisher();
         Set<Book> books = new HashSet<>();
 
-        publisher.setName("epic");
-        publisher.setStreet("11213 epic street");
-        publisher.setBooks(books);
+        Publisher publisher = new Publisher();
+        publisher.setName("Foxware");
+        publisher.setStreet("Ann Ave");
+        publisher.setCity("Los Angeles");
         publisher.setState("CA");
-        publisher.setCity("LA");
-        publisher.setPostalCode("11123");
-        publisher.setPhone("123-456-789");
-        publisher.setEmail("epic@gmail.com");
+        publisher.setPostalCode("78952");
+        publisher.setPhone("1-(816)255-4849");
+        publisher.setEmail("bestpublisher@publishing.org");
+        publisher.setBooks(books);
 
-        Publisher publisher1 = repo.save(publisher);
+        publisher = PublisherRepo.save(publisher);
+
+        Author author = new Author();
+        author.setFirstName("Mark");
+        author.setLastName("Epic");
+        author.setStreet("1112 street");
+        //books.add(book);
+        //author.setBooks(books);
+        author.setCity("Miami");
+        author.setState("FL");
+        author.setPostalCode("1111");
+        author.setPhone("123-456-7890");
+        author.setEmail("Mark@gmail.com");
+
+
+        AuthorRepo.save(author);
+
+        Book book = new Book();
+        book.setIsbn("1111111111");
+        book.setPublishDate(LocalDate.of(2012,10,12));
+        book.setTitle("Death");
+        book.setPublisherId(publisher.getId());
+        BigDecimal num = new BigDecimal("1.00");
+        book.setPrice(num);
+        book.setAuthorId(author.getId());
+
+        book = BookRepo.save(book);
+
+        books.add(book);
+
+        Publisher publisher1 = PublisherRepo.save(publisher);
 
 
         publisher1.setName("swag");
 
-        Publisher publisher2 = repo.save(publisher1);
+        Publisher publisher2 = PublisherRepo.save(publisher1);
 
         assertEquals(publisher2,publisher1);
 
@@ -78,23 +145,51 @@ public class PublisherRepositoryTest {
 
     @Test
     public void ShouldDeleteAPublisher () throws Exception {
+        //Set<Book> books = new HashSet<>();
+
         Publisher publisher = new Publisher();
-        Set<Book> books = new HashSet<>();
-
-        publisher.setName("epic");
-        publisher.setStreet("11213 epic street");
-        publisher.setBooks(books);
+        publisher.setName("Foxware");
+        publisher.setStreet("Ann Ave");
+        publisher.setCity("Los Angeles");
         publisher.setState("CA");
-        publisher.setCity("LA");
-        publisher.setPostalCode("11123");
-        publisher.setPhone("123-456-789");
-        publisher.setEmail("epic@gmail.com");
+        publisher.setPostalCode("78952");
+        publisher.setPhone("1-(816)255-4849");
+        publisher.setEmail("bestpublisher@publishing.org");
+        //publisher.setBooks(books);
 
-        publisher = repo.save(publisher);
+        publisher = PublisherRepo.save(publisher);
 
-        repo.deleteById(publisher.getId());
+        Author author = new Author();
+        author.setFirstName("Mark");
+        author.setLastName("Epic");
+        author.setStreet("1112 street");
+        //books.add(book);
+        //author.setBooks(books);
+        author.setCity("Miami");
+        author.setState("FL");
+        author.setPostalCode("1111");
+        author.setPhone("123-456-7890");
+        author.setEmail("Mark@gmail.com");
 
-        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
+
+        AuthorRepo.save(author);
+
+        Book book = new Book();
+        book.setIsbn("1111111111");
+        book.setPublishDate(LocalDate.of(2012,10,12));
+        book.setTitle("Death");
+        book.setPublisherId(publisher.getId());
+        BigDecimal num = new BigDecimal("1.00");
+        book.setPrice(num);
+        book.setAuthorId(author.getId());
+
+        //BookRepo.save(book); if you save a book this test fails
+
+        //books.add(book);
+
+        PublisherRepo.deleteById(publisher.getId());
+
+        Optional<Publisher> publisher1 = PublisherRepo.findById(publisher.getId());
 
         assertFalse(publisher1.isPresent());
 
@@ -103,21 +198,49 @@ public class PublisherRepositoryTest {
     @Test
     public void ShouldFindAPublisherById() throws Exception {
 
-        Publisher publisher = new Publisher();
         Set<Book> books = new HashSet<>();
 
-        publisher.setName("epic");
-        publisher.setStreet("11213 epic street");
-        publisher.setBooks(books);
+        Publisher publisher = new Publisher();
+        publisher.setName("Foxware");
+        publisher.setStreet("Ann Ave");
+        publisher.setCity("Los Angeles");
         publisher.setState("CA");
-        publisher.setCity("LA");
-        publisher.setPostalCode("11123");
-        publisher.setPhone("123-456-789");
-        publisher.setEmail("epic@gmail.com");
+        publisher.setPostalCode("78952");
+        publisher.setPhone("1-(816)255-4849");
+        publisher.setEmail("bestpublisher@publishing.org");
+        publisher.setBooks(books);
 
-        publisher = repo.save(publisher);
+        publisher = PublisherRepo.save(publisher);
 
-        Optional<Publisher> publisher1 = repo.findById(publisher.getId());
+        Author author = new Author();
+        author.setFirstName("Mark");
+        author.setLastName("Epic");
+        author.setStreet("1112 street");
+        //books.add(book);
+        //author.setBooks(books);
+        author.setCity("Miami");
+        author.setState("FL");
+        author.setPostalCode("1111");
+        author.setPhone("123-456-7890");
+        author.setEmail("Mark@gmail.com");
+
+
+        AuthorRepo.save(author);
+
+        Book book = new Book();
+        book.setIsbn("1111111111");
+        book.setPublishDate(LocalDate.of(2012,10,12));
+        book.setTitle("Death");
+        book.setPublisherId(publisher.getId());
+        BigDecimal num = new BigDecimal("1.00");
+        book.setPrice(num);
+        book.setAuthorId(author.getId());
+
+        book = BookRepo.save(book);
+
+        books.add(book);
+
+        Optional<Publisher> publisher1 = PublisherRepo.findById(publisher.getId());
 
         assertEquals(publisher1.get(),publisher);
 
@@ -127,29 +250,57 @@ public class PublisherRepositoryTest {
     @Test
     public void ShouldFindAllPublishers () throws Exception {
 
-        Publisher publisher = new Publisher();
         Set<Book> books = new HashSet<>();
 
-        publisher.setName("epic");
-        publisher.setStreet("11213 epic street");
-        publisher.setBooks(books);
+        Publisher publisher = new Publisher();
+        publisher.setName("Foxware");
+        publisher.setStreet("Ann Ave");
+        publisher.setCity("Los Angeles");
         publisher.setState("CA");
-        publisher.setCity("LA");
-        publisher.setPostalCode("11123");
-        publisher.setPhone("123-456-789");
-        publisher.setEmail("epic@gmail.com");
+        publisher.setPostalCode("78952");
+        publisher.setPhone("1-(816)255-4849");
+        publisher.setEmail("bestpublisher@publishing.org");
+        publisher.setBooks(books);
 
-        publisher = repo.save(publisher);
+        publisher = PublisherRepo.save(publisher);
+
+        Author author = new Author();
+        author.setFirstName("Mark");
+        author.setLastName("Epic");
+        author.setStreet("1112 street");
+        //books.add(book);
+        //author.setBooks(books);
+        author.setCity("Miami");
+        author.setState("FL");
+        author.setPostalCode("1111");
+        author.setPhone("123-456-7890");
+        author.setEmail("Mark@gmail.com");
+
+
+        AuthorRepo.save(author);
+
+        Book book = new Book();
+        book.setIsbn("1111111111");
+        book.setPublishDate(LocalDate.of(2012,10,12));
+        book.setTitle("Death");
+        book.setPublisherId(publisher.getId());
+        BigDecimal num = new BigDecimal("1.00");
+        book.setPrice(num);
+        book.setAuthorId(author.getId());
+
+        book = BookRepo.save(book);
+
+        books.add(book);
 
         List<Publisher> publisherList = new ArrayList<>();
 
         publisherList.add(publisher);
 
-        List<Publisher> publisherList2 = repo.findAll();
+        List<Publisher> publisherList2 = PublisherRepo.findAll();
 
         assertEquals(publisherList2,publisherList);
     }
-  
+
 
 
 

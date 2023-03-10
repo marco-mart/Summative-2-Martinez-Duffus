@@ -14,35 +14,35 @@ import java.util.Set;
 @Table(name="publisher")
 public class Publisher implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="publisher_id")
-    private Integer id;
+    private int id;
 
-    @NotNull
+
     private String name;
 
-    @NotNull
+
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher_id")
-    Set<Book> books = new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 
-    @NotNull
+
     private String state;
 
-    @NotNull
+
     private String city;
 
-    @NotNull
+
     @Column(name="postal_code")
     private String postalCode;
 
 
-    @NotNull
+
     private String phone;
 
-    @NotNull
+
     private String email;
 
 
