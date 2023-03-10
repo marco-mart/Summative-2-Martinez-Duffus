@@ -7,8 +7,8 @@ import com.company.Summative2MartinezDuffus.repositories.AuthorRepository;
 import com.company.Summative2MartinezDuffus.repositories.BookRepository;
 import com.company.Summative2MartinezDuffus.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.Optional;
@@ -25,8 +25,9 @@ public class GraphController {
     @Autowired
     PublisherRepository PublisherRepo;
 
-    @Query
-    public Publisher findPublisherById(@Argument int id) {
+    @QueryMapping
+    public Publisher findPublisherById(@Argument Integer id) {
+
         Optional<Publisher> publisher = PublisherRepo.findById(id);
 
         if (publisher.isPresent()){
@@ -36,8 +37,9 @@ public class GraphController {
         }
     }
 
-    @Query
-    public Author findAuthorById(@Argument int id){
+    @QueryMapping
+    public Author findAuthorById(@Argument Integer id){
+
         Optional<Author> author= AuthorRepo.findById(id);
 
         if (author.isPresent()){
@@ -47,8 +49,9 @@ public class GraphController {
         }
     }
 
-    @Query
-    public Book findBookById(@Argument int id){
+    @QueryMapping
+    public Book findBookById(@Argument Integer id){
+
         Optional<Book> book = BookRepo.findById(id);
 
         if (book.isPresent()){
