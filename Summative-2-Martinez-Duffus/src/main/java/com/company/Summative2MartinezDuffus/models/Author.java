@@ -1,6 +1,7 @@
 package com.company.Summative2MartinezDuffus.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,39 +16,39 @@ import java.util.Set;
 public class Author implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="author_id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @NotNull
+
     @Column(name="first_name")
     private String firstName;
 
-    @NotNull
+
     @Column(name="last_name")
     private String lastName;
 
-    @NotNull
+
     private String street;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private Set<Book> books = new HashSet<>();
 
-    @NotNull
+
     private String city;
 
-    @NotNull
+
     private String state;
 
-    @NotNull
+
     @Column(name="postal_code")
     private String postalCode;
 
-    @NotNull
+
     private String phone;
 
-    @NotNull
+
     private String email;
 
 

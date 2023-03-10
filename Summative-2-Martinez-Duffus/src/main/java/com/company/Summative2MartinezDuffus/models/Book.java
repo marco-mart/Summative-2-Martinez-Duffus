@@ -16,29 +16,29 @@ import java.util.Objects;
 public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="book_id")
-    private Integer id;
+    private int id;
 
-    @NotNull
+
     private String isbn;
 
-    @NotNull
+
     @Column(name="publish_date")
     private LocalDate publishDate;
 
-    @NotNull
+
     @Column(name="author_id")
     private int authorId;
 
-    @NotNull
+
     private String title;
 
-    @NotNull
+
     @Column(name="publisher_id")
     private int publisherId;
 
-    @NotNull
+
     private BigDecimal price;
 
     public Integer getId() {
