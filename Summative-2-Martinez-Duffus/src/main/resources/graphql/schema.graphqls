@@ -20,12 +20,11 @@ type Author {
     email: String!
 }
 
-scalar Date #stack overflow
 
 type Book {
     book_id: Int!
     isbn: String!
-    publish_date: Date!
+    publish_date: String!
     author_id: Int!
     title: String!
     publisher_id: Int!
@@ -36,7 +35,7 @@ type Query {
     publishers: [Publisher]!
     findPublisherById(id:Int): Publisher
 
-    author: [Author]!
+    authors: [Author]!
     findAuthorById(id:Int): Author
 
     books: [Book]!
