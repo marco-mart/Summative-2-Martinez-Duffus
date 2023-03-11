@@ -21,6 +21,10 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class PublisherRepositoryTest {
 
+    /**
+     * Note: MUST USE ALL THREE MODELS, AND ALL THREE REPOS IN EVERY TEST
+     *       FOR IT TO WORK!
+     */
     @Autowired
     BookRepository BookRepo;
 
