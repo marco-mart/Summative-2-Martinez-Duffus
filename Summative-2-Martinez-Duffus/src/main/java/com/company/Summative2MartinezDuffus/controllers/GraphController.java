@@ -9,6 +9,7 @@ import com.company.Summative2MartinezDuffus.repositories.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.Optional;
@@ -24,6 +25,27 @@ public class GraphController {
 
     @Autowired
     PublisherRepository PublisherRepo;
+
+
+    @SchemaMapping
+    public Author author(Book book) {
+        Optional<Author> returnVal = AuthorRepo.findById(book.getAuthorId());
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
+
+    @SchemaMapping
+    public Publisher publisher(Book book) {
+        Optional<Publisher> returnVal = PublisherRepo.findById(book.getPublisherId());
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
+    }
 
     @QueryMapping
     public Publisher findPublisherById(@Argument Integer id) {

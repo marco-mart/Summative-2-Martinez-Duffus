@@ -11,6 +11,7 @@ type Publisher {
     postalCode: String!
     phone: String!
     email: String!
+    books: [Book]
 }
 
 type Author {
@@ -22,6 +23,7 @@ type Author {
     state: String!
     phone: String!
     email: String!
+    books: [Book]
 }
 
 
@@ -29,9 +31,9 @@ type Book {
     id: Int!
     isbn: String!
     publishDate: String!
-    authorId: Int!
+    author: Author!
     title: String!
-    publisherId: Int!
+    publisher: Publisher!
     price : Float!
 }
 
