@@ -1,2 +1,3 @@
 # Summative-2-Martinez-Duffus
-Summative 2
+
+Video Summary: https://youtu.be/_zZ6Vtn07r4
